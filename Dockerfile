@@ -4,12 +4,14 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql
 
+COPY composer.json composer.lock ./
+
+RUN composer install --no-scripts --no-autoloader
+
 WORKDIR /var/www/html
 
 COPY . .
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-EXPOSE 8080
 
 CMD php artisan serve --host=0.0.0.0 --port=8080

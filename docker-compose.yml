@@ -6,7 +6,7 @@ services:
     image: francescoxx/laravelapp:1.0.3
     build: .
     ports:
-      - "8000:8000"
+      - "8080:8080"
     env_file:
       - .env
     depends_on:
@@ -14,7 +14,7 @@ services:
   
   db:
     container_name: db
-    image: postgres:12
+    image: bitnami/postgresql:12.17.0
     ports:
       - "5432:5432"
     environment:
